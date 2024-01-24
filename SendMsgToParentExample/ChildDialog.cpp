@@ -43,7 +43,7 @@ void ChildDialog::OnBnClickedBtnSendMsgToParent()
 
 	CString* pStr = new CString(msg);
 
-	GetParent()->SendMessage(FSM_MESSAGE, (WPARAM)pStr, 268);
+	GetParent()->PostMessage(FSM_MESSAGE, (WPARAM)pStr, 268);
 }
 
 
