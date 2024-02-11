@@ -5,7 +5,7 @@
 #include "SendMsgToParentExample.h"
 #include "ChildDialog.h"
 #include "afxdialogex.h"
-
+#include <thread>
 
 // ChildDialog dialog
 
@@ -30,6 +30,7 @@ void ChildDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(ChildDialog, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_SEND_MSG_TO_PARENT, &ChildDialog::OnBnClickedBtnSendMsgToParent)
+	ON_BN_CLICKED(IDC_BTN_SEND_MSG_FROM_THREAD, &ChildDialog::OnBnClickedBtnSendMsgFromThread)
 END_MESSAGE_MAP()
 
 
@@ -56,4 +57,17 @@ BOOL ChildDialog::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+
+void ChildDialog::OnBnClickedBtnSendMsgFromThread()
+{
+	std::thread th([this] {
+		CString* pStr = new CString(_T("Msg From Thread"));
+
+		GetParent()->PostMessage(FSM_MESSAGE, (WPARAM)pStr, 268);
+
+		});
+
+	th.join();
 }

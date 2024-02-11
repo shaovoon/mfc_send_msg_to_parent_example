@@ -24,4 +24,5 @@ public:
 	afx_msg void OnBnClickedBtnSendMsgToParent();
 	CEdit m_edtMsg;
 	virtual BOOL OnInitDialog();
+	afx_msg void OnBnClickedBtnSendMsgFromThread();
 };
